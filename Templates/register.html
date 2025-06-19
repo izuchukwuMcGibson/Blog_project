@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - NovaUI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<style>
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+    border: none; /* No border */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); /* Subtle shadow */
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+  .alert-success { background-color: #28a745; }
+  .alert-error   { background-color: #dc3545; }
+  .alert-warning { background-color: #ffc107; color: #212529; }
+  .alert-info    { background-color: #17a2b8; }
+</style>
+  <div class="container">
+    <h2>Create an Account</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+    <form action="{{ url_for('register') }}"  method="post">
+      <input type="text" placeholder="Full Name" required name="name"/>
+      <input type="email" placeholder="Email Address" required name="email" />
+          <input type="password" placeholder="Password" required name="password"/>
+
+      <button type="submit">Register</button>
+    </form>
+    <p class="text-sm">
+      Already have an account? <a href="{{url_for('login')}}">Login</a>
+    </p>
+  </div>
+</body>
+
+</html>

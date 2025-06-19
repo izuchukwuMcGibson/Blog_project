@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }} | My Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='read_more.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>{{ post.title }}</h2>
+        <p class="author">By {{ post.blog.username }} </p>
+
+        <p class="content">{{ post.content }}</p>
+
+        <div class="icons">
+           <form action="{{ url_for('like_post', post_id=post.id) }}" method="POST" style="display:inline;">
+               <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+                   <span><i class="fa-regular fa-thumbs-up"></i>
+                    {{ post.likes.count() }} </span>
+               </button>
+           </form>
+
+   </div>
+        <p> Date: {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+
+        <form action="{{ url_for('comment_post', post_id=post.id) }}" method="POST">
+            <span><i class="fa-regular fa-comment"></i></span>
+          Total Comments: {{ post.comments|length }}
+            {{ form.hidden_tag() }}
+            {{ form.content.label }}<br>
+          {{ form.content(cols=30, rows=3) }}<br>
+           {{ form.submit() }}
+       </form>
+
+        <h3>Comments</h3>
+<ul>
+    {% for comment in post.comments %}
+    <li><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</li>
+    {% else %}
+    <li>No comments yet.</li>
+    {% endfor %}
+</ul>
+
+  <p class="form-footer"><a href="{{url_for('blog')}}" class="back-link">← Back to Blog</a></p>
+        <div class="action-buttons">
+            {% if post.blog.username== current_user %}
+                <a href="{{ url_for('edit_post',edit_id=post.id) }}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
+                <a href="{{ url_for('delete_post', post_id=post.id) }}" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
+

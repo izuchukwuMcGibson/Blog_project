@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Post - NovaUI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" >
+    <!-- Link to your CSS file -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- For icons if needed -->
+</head>
+<body class="bg-gradient-to-br from-purple-800 to-indigo-900 min-h-screen flex items-center justify-center">
+  <div class="form-container">
+    <h2 class="form-title">Create a New Post</h2>
+    <form action="{{ url_for('create_post') }}" method="POST" class="space-y-4">
+      <input type="text" name="title" placeholder="Post Title" required>
+      <textarea name="content" rows="5" placeholder="Write your content here..." required></textarea>
+      <button type="submit" class="submit-btn">Publish Post</button>
+    </form>
+    <p class="form-footer"><a href="{{url_for('blog')}}" class="back-link">← Back to Blog</a></p>
+  </div>
+</body>
+</html>

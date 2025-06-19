@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - NovaUI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body class="blog">
+  <header>
+  <h1>NovaUI Blog</h1>
+      <nav>
+        <span class="greeting">Welcome back,{{ current_user.username }}</span>
+        <a href="{{url_for('create_post')}}" class="nav-link">Create Post</a>
+        <a href="{{url_for('log_out')}}"class="nav-link">Logout</a>
+      </nav>
+
+
+  </header>
+
+  <main>
+      {% for x in post %}
+    <article>
+      <h2>{{ x.title }}</h2>
+      <p>{{ x.content }}</p>
+      <div class="meta">
+        <span><strong>Author:</strong> {{ x.blog.username }}</span>
+        <span><strong>Date: </strong>{{ x.date_posted.strftime('%B %d, %Y') }}</span>
+      <form action=" {{ url_for('like_post', post_id=x.id) }}" method="POST">
+       <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+           <span><strong><i class="fas fa-thumbs-up"></i>   {{ x.likes.count() }} </strong>
+           </span>
+       </button>
+      </form>
+         <span><strong><i class="fas fa-comment"></i> </strong>  {{ x.comments|length }}</span>
+      </div>
+      <a href="{{url_for('read_more',post_id=x.id)}}">Read more</a>
+      {% if current_user.id == x.user_id %}
+      <div class="post-actions">
+      <a href="{{ url_for('edit_post', edit_id=x.id) }}" title="Edit Post">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a href="{{ url_for('delete_post', post_id=x.id) }}" title="Delete Post">
+        <i class="fas fa-trash-alt"></i>
+          {% endif %}
+      </a>
+    </div>
+    </article>
+      {% endfor %}
+
+
+  </main>
+</body>
+</html>
