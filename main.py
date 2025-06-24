@@ -11,7 +11,7 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SubmitField
 from wtforms.validators import DataRequired
-import os
+# import os
 
 
 
@@ -21,12 +21,12 @@ import os
 # ✅ SET ENVIRONMENT VARIABLES HERE:
 
 app = Flask(__name__, instance_relative_config=True)
-# app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
-# app.config['SECRET_KEY'] = 'hello'
+app.config['SECRET_KEY'] = 'hello'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
