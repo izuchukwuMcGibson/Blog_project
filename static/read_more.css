@@ -104,3 +104,57 @@ h2 {
 .back-link:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  .author {
+    font-size: 0.85rem;
+  }
+
+  .content {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .icons {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .edit-btn, .delete-btn, .comment-btn {
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
