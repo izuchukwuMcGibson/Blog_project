@@ -1,6 +1,7 @@
 # from calendar import error
 
 from flask import Flask, render_template, url_for, request, redirect, flash
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import column, false, Select
 from sqlalchemy.sql.functions import current_user
@@ -33,6 +34,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 app.config['SECRET_KEY'] = 'hello'
 db = SQLAlchemy(app)
+migrate = Migrate()
+migrate.init_app(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'  # Redirects to login page if not logged in
@@ -42,7 +45,7 @@ class User(db.Model,UserMixin):
    id= db.Column(db.Integer,primary_key= True)
    username = db.Column(db.String(80),nullable= False,unique = True)
    email = db.Column(db.String(80), nullable=False,unique =True )
-   password = db.Column(db.String(80), nullable=False ,unique =True)
+   password = db.Column(db.String(200), nullable=False ,unique =True)
    author = db.Relationship('Blog', back_populates='blog')
    likes = db.relationship('Like', backref='user', lazy='dynamic')
 
