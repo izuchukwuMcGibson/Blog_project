@@ -1,3 +1,13 @@
+/* === GLOBAL RESET === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+
 body {
     background: linear-gradient(to right,  #7e22ce,  #7e22ce);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

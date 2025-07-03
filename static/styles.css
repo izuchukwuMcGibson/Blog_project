@@ -1,3 +1,9 @@
+/* Fix overflow issues from padding/border */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 /* style.css */
 body {
